@@ -10,7 +10,7 @@ import random
 import os
 from voices_manager import TTSManager
 
-TWITCH_CHANNEL_NAME = 'dougdoug' # Replace this with your channel name
+TWITCH_CHANNEL_NAME = 'willshpt' # Replace this with your channel name
 
 socketio = SocketIO
 app = Flask(__name__)
@@ -95,6 +95,7 @@ class Bot(commands.Bot):
         self.tts_manager = TTSManager()
 
         #connects to twitch channel
+        print(os.getenv('TWITCH_ACCESS_TOKEN'))
         super().__init__(token=os.getenv('TWITCH_ACCESS_TOKEN'), prefix='?', initial_channels=[TWITCH_CHANNEL_NAME])
     
     async def event_ready(self):

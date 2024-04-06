@@ -5,7 +5,7 @@ from azure_text_to_speech import AzureTTSManager
 class TTSManager:
     azuretts_manager = AzureTTSManager()
     audio_manager = AudioManager()
-    obswebsockets_manager = OBSWebsocketsManager()
+    #obswebsockets_manager = OBSWebsocketsManager()
 
     user1_voice_name = "en-US-DavisNeural"
     user1_voice_style = "random"
@@ -46,8 +46,10 @@ class TTSManager:
             voice_style = self.user3_voice_style
 
         tts_file = self.azuretts_manager.text_to_audio(text, voice_name, voice_style)
+        self.audio_manager.play_audio(tts_file, True, True, True)
 
         # OPTIONAL: Use OBS Websockets to enable the Move plugin filter
+        """
         if user_number == "1":
             self.obswebsockets_manager.set_filter_visibility("Line In", "Audio Move - DnD Player 1", True)
         elif user_number == "2":
@@ -63,3 +65,4 @@ class TTSManager:
             self.obswebsockets_manager.set_filter_visibility("Line In", "Audio Move - DnD Player 2", False)
         elif user_number == "3":
             self.obswebsockets_manager.set_filter_visibility("Line In", "Audio Move - DnD Player 3", False)
+"""
