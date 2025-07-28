@@ -10,3 +10,6 @@ pygame_ce
 pytz
 soundfile
 twitchio
+elevenlabs==0.2.24
+pydantic==1.10.13
+sounddevice

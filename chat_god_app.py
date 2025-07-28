@@ -77,7 +77,7 @@ def choose_voice_style(value):
 class Bot(commands.Bot):
     current_user_1 = None
     current_user_2 = None
-    current_user_3 = None
+    current_user_3 = 'willshpt'
     tts_enabled_1 = True
     tts_enabled_2 = True
     tts_enabled_3 = True
@@ -95,7 +95,6 @@ class Bot(commands.Bot):
         self.tts_manager = TTSManager()
 
         #connects to twitch channel
-        print(os.getenv('TWITCH_ACCESS_TOKEN'))
         super().__init__(token=os.getenv('TWITCH_ACCESS_TOKEN'), prefix='?', initial_channels=[TWITCH_CHANNEL_NAME])
     
     async def event_ready(self):

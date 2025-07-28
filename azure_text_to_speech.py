@@ -2,9 +2,16 @@ import os
 import random
 import time
 import azure.cognitiveservices.speech as speechsdk
+from elevenlabs import generate, stream, set_api_key, voices, play, save
 from gtts import gTTS
 from pydub import AudioSegment
 import pygame
+
+try:
+  set_api_key(os.getenv('ELEVENLABS_API_KEY'))
+  pass
+except TypeError:
+  exit("Ooops! You forgot to set ELEVENLABS_API_KEY in your environment!")
 
 AZURE_VOICES = [
     "en-US-DavisNeural",
@@ -52,6 +59,8 @@ class AzureTTSManager:
 
     def __init__(self):
         pygame.init()
+        all_voices = voices()
+        print(f"\nAll ElevenLabs voices: \n{all_voices}\n")
         # Creates an instance of a speech config with specified subscription key and service region.
         # Replace with your own subscription key and service region (e.g., "westus").
         #self.azure_speechconfig = speechsdk.SpeechConfig(subscription=os.getenv('AZURE_TTS_KEY'), region=os.getenv('AZURE_TTS_REGION'))
@@ -84,21 +93,63 @@ class AzureTTSManager:
         #result = self.azure_synthesizer.speak_ssml_async(ssml_text).get()
 
         output = os.path.join(os.path.abspath(os.curdir), f"_Msg{str(hash(text))}{str(hash(voice_name))}{str(hash(voice_style))}.wav")
-        if False:
-            stream = speechsdk.AudioDataStream(result)
-            stream.save_to_wav_file(output)
+        if voice_name == "Rachel":
+            audio_saved = generate(
+                text=text,
+                voice="Rachel",
+                model="eleven_monolingual_v1"
+            )
+            #file_name = f"___Msg{str(hash(input_text))}.wav"
+            output_mp3 = output.replace(".wav", ".mp3")
+            save(audio_saved,output_mp3)
+            audiosegment = AudioSegment.from_mp3(output_mp3)
+            audiosegment.export(output, format="wav")
+            os.remove(output_mp3)
+        elif voice_name == "Antoni":
+            audio_saved = generate(
+                text=text,
+                voice="Antoni",
+                model="eleven_monolingual_v1"
+            )
+            #file_name = f"___Msg{str(hash(input_text))}.wav"
+            output_mp3 = output.replace(".wav", ".mp3")
+            save(audio_saved,output_mp3)
+            audiosegment = AudioSegment.from_mp3(output_mp3)
+            audiosegment.export(output, format="wav")
+            os.remove(output_mp3)
+        elif voice_name == "Sam":
+            audio_saved = generate(
+                text=text,
+                voice="Sam",
+                model="eleven_monolingual_v1"
+            )
+            #file_name = f"___Msg{str(hash(input_text))}.wav"
+            output_mp3 = output.replace(".wav", ".mp3")
+            save(audio_saved,output_mp3)
+            audiosegment = AudioSegment.from_mp3(output_mp3)
+            audiosegment.export(output, format="wav")
+            os.remove(output_mp3)
+        elif voice_name == "JK":
+            audio_saved = generate(
+                text=text,
+                voice="JK Simmons HUH",
+                model="eleven_monolingual_v1"
+            )
+            #file_name = f"___Msg{str(hash(input_text))}.wav"
+            output_mp3 = output.replace(".wav", ".mp3")
+            save(audio_saved,output_mp3)
+            audiosegment = AudioSegment.from_mp3(output_mp3)
+            audiosegment.export(output, format="wav")
+            os.remove(output_mp3)
         else:
             # If Azure fails, use gTTS instead. gTTS saves as an mp3 by default, so convert it to a wav file after
-            print("\n   Azure failed, using gTTS instead   \n")
-            #print(output)
+            #print("\n   Azure failed, using gTTS instead   \n")
             output_mp3 = output.replace(".wav", ".mp3")
             msgAudio = gTTS(text=text, lang='en', slow=False)
             msgAudio.save(output_mp3)
-            #print(output_mp3)
-            #time.sleep(10)
-            print(os.path.isfile(output_mp3))
             audiosegment = AudioSegment.from_mp3(output_mp3)
             audiosegment.export(output, format="wav")
+            os.remove(output_mp3)
 
         return output
 
