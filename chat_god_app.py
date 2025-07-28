@@ -77,7 +77,7 @@ def choose_voice_style(value):
 class Bot(commands.Bot):
     current_user_1 = None
     current_user_2 = None
-    current_user_3 = 'willshpt'
+    current_user_3 = None
     tts_enabled_1 = True
     tts_enabled_2 = True
     tts_enabled_3 = True

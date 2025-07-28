@@ -93,10 +93,10 @@ class AzureTTSManager:
         #result = self.azure_synthesizer.speak_ssml_async(ssml_text).get()
 
         output = os.path.join(os.path.abspath(os.curdir), f"_Msg{str(hash(text))}{str(hash(voice_name))}{str(hash(voice_style))}.wav")
-        if voice_name == "Rachel":
+        if voice_name == "Aria":
             audio_saved = generate(
                 text=text,
-                voice="Rachel",
+                voice="Aria",
                 model="eleven_monolingual_v1"
             )
             #file_name = f"___Msg{str(hash(input_text))}.wav"
@@ -105,10 +105,10 @@ class AzureTTSManager:
             audiosegment = AudioSegment.from_mp3(output_mp3)
             audiosegment.export(output, format="wav")
             os.remove(output_mp3)
-        elif voice_name == "Antoni":
+        elif voice_name == "Liam":
             audio_saved = generate(
                 text=text,
-                voice="Antoni",
+                voice="Liam",
                 model="eleven_monolingual_v1"
             )
             #file_name = f"___Msg{str(hash(input_text))}.wav"
@@ -117,10 +117,10 @@ class AzureTTSManager:
             audiosegment = AudioSegment.from_mp3(output_mp3)
             audiosegment.export(output, format="wav")
             os.remove(output_mp3)
-        elif voice_name == "Sam":
+        elif voice_name == "Chris":
             audio_saved = generate(
                 text=text,
-                voice="Sam",
+                voice="Chris",
                 model="eleven_monolingual_v1"
             )
             #file_name = f"___Msg{str(hash(input_text))}.wav"

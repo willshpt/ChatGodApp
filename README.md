@@ -21,13 +21,15 @@ Then, set these as windows environment variables named AZURE_TTS_KEY and AZURE_T
 5) Optionally, you can use OBS Websockets and an OBS plugin to make images move while talking.
 First open up OBS. Make sure you're running version 28.X or later.
 Click Tools, then WebSocket Server Settings.
-Make sure "Enable WebSocket server" is checked. Make sure Server Port is '4455', and set the Server Password to 'TwitchChat9'.
+Make sure "Enable WebSocket server" is checked. Make sure Server Port is '4455', and set the Server Password in 'websockets_auth.py' to whatever you want it to be! (I recommend generating a new password in OBS)
 Next install the Move OBS plugin: https://obsproject.com/forum/resources/move.913/
 Now you can use the plugin to add a filter to an audio source that will change an image's transform based on the audio waveform.
 For example, I have a filter that will move each of the player images whenever text-to-speech audio is playing.
 Lastly, in the voices_manager.py code, update the OBS section so that it will turn the corresponding filters on and off when text-to-speech audio is being played.
 Note that OBS must be open when you're running this code, otherwise OBS WebSockets won't be able to connect.
 If you don't need the images to move while talking, you can just delete the OBS portions of the code.
+
+OPTIONALLY you can also use Elevenlabs for voices by setting a windows environment variable ELEVENLABS_API_KEY after making an account and creating a voice. Once you've made an Ai voice on the Elevenlabs website, open up azure_text_to_speech.py and replace the ELEVENLABS_VOICE variable with the name of your Ai voice.
 
 ## BASIC APP USAGE
 
